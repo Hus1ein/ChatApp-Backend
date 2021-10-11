@@ -6,8 +6,11 @@ import com.chatapp.chatappbackend.services.interfaces.ChatsService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +22,9 @@ public class ChatsController {
     private final ChatsService chatsService;
 
     @GetMapping(path = "")
-    public ResponseEntity<List<Chat>> getAll() {
-        return new ResponseEntity<>(chatsService.getAll("1"), HttpStatus.OK);
+    public ResponseEntity<List<Chat>> getAll(@AuthenticationPrincipal String principal) {
+        System.out.println(principal);
+        return new ResponseEntity<>(chatsService.getAll("+38762961404"), HttpStatus.OK);
     }
 
     @PostMapping(path = "")

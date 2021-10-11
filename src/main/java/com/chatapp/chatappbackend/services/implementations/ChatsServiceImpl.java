@@ -24,9 +24,9 @@ public class ChatsServiceImpl implements ChatsService {
     private final UsersRepository usersRepository;
 
     @Override
-    public List<Chat> getAll(String userId) {
-        log.info("Getting all chats by userId: {}", userId);
-        List<Chat> chatList = chatsRepository.findAllByCreatedBy(userId)
+    public List<Chat> getAll(String username) {
+        log.info("Getting all chats by username: {}", username);
+        List<Chat> chatList = chatsRepository.findAllByCreatedBy(username)
                 .stream()
                 .map(ChatEntity::toModel)
                 .toList();
