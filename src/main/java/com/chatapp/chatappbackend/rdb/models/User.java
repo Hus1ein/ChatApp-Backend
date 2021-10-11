@@ -17,6 +17,7 @@ public class User {
     private String username;
     private String firstName;
     private String lastName;
+    private String photo;
     private UserStatus status;
     private Date lastSeen;
 

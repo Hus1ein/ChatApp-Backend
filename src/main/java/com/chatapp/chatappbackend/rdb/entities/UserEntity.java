@@ -24,6 +24,7 @@ public class UserEntity {
     private String firstName;
     private String lastName;
     private String phoneNumber;
+    private String photo;
     @Enumerated(value = EnumType.STRING)
     private UserStatus status;
     private Date lastSeen;

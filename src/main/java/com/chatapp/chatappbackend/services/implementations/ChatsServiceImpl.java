@@ -6,7 +6,8 @@ import com.chatapp.chatappbackend.rdb.models.Chat;
 import com.chatapp.chatappbackend.rdb.repositories.ChatsRepository;
 import com.chatapp.chatappbackend.rdb.repositories.UsersRepository;
 import com.chatapp.chatappbackend.services.interfaces.ChatsService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,7 +15,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@AllArgsConstructor
+@Slf4j
+@RequiredArgsConstructor
 @Service
 public class ChatsServiceImpl implements ChatsService {
 
@@ -23,14 +25,18 @@ public class ChatsServiceImpl implements ChatsService {
 
     @Override
     public List<Chat> getAll(String userId) {
-        return chatsRepository.findAllByCreatedBy(userId)
+        log.info("Getting all chats by userId: {}", userId);
+        List<Chat> chatList = chatsRepository.findAllByCreatedBy(userId)
                 .stream()
                 .map(ChatEntity::toModel)
                 .toList();
+        log.info("Chat list of");
+        return chatList;
     }
 
     @Override
     public Chat create(String userId, Chat chat) {
+
         UserEntity userEntity = usersRepository.findById(userId).get();
         ChatEntity chatEntity = ChatEntity.builder()
                 .id(UUID.randomUUID().toString())
