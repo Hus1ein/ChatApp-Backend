@@ -14,11 +14,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import java.util.Date;
 
+@Entity(name = "reactions")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "reactions")
 public class ReactionEntity {
 
     @Id

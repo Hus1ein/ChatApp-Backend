@@ -3,7 +3,6 @@ package com.chatapp.chatappbackend.security;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.util.TextUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -55,12 +54,10 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
                     return;
                 }
 
-                System.out.println(username);
                 Collection<GrantedAuthority> authorities = new ArrayList<>();
 
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username,null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(token);
-                log.info(SecurityContextHolder.getContext().getAuthentication().getName());
                 filterChain.doFilter(request, response);
 
             } catch (InterruptedException | ExecutionException | FirebaseAuthException e) {

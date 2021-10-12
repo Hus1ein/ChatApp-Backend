@@ -14,11 +14,11 @@ import javax.persistence.OneToMany;
 import java.util.Date;
 import java.util.List;
 
+@Entity(name = "messages")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "messages")
 public class MessageEntity {
 
     @Id

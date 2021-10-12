@@ -15,9 +15,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@Slf4j
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
+@Slf4j
 public class ChatsServiceImpl implements ChatsService {
 
     private final ChatsRepository chatsRepository;

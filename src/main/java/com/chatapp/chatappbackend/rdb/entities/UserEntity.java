@@ -11,11 +11,11 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Entity(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "users")
 public class UserEntity {
 
     @Id

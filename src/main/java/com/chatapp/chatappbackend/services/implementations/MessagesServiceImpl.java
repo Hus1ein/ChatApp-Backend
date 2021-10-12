@@ -16,8 +16,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class MessagesServiceImpl implements MessagesService {
 
     private final MessagesRepository messagesRepository;
