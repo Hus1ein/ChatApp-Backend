@@ -26,10 +26,10 @@ public class ChatsServiceImpl implements ChatsService {
     @Override
     public List<Chat> getAll(String username) {
         log.info("Getting all chats by username: {}", username);
-        List<Chat> chatList = chatsRepository.findAllByCreatedBy(username)
+        List<Chat> chatList = new ArrayList<>();/*chatsRepository.findAllByCreatedBy(username)
                 .stream()
                 .map(ChatEntity::toModel)
-                .toList();
+                .toList();*/
         log.info("Chat list of");
         return chatList;
     }
@@ -42,14 +42,11 @@ public class ChatsServiceImpl implements ChatsService {
                 .id(UUID.randomUUID().toString())
                 .name(chat.getName())
                 .type(chat.getType())
-                .createdBy(userId)
+                .createdBy(userEntity)
                 .createdAt(new Date())
                 .participants(List.of(userEntity))
-                .messages(new ArrayList<>())
                 .build();
         chatEntity = chatsRepository.save(chatEntity);
-        userEntity.getChats().add(chatEntity);
-        usersRepository.save(userEntity);
         return chatEntity.toModel();
     }
 

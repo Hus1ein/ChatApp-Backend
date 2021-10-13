@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -16,7 +17,9 @@ public class Chat {
     private String id;
     private String name;
     private ChatType type;
-    private String createdBy;
+    private User createdBy;
+    private Date createdAt;
     private List<User> participants;
+    private List<Message> messages;
 
 }

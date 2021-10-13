@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity(name = "users")
 @Data
@@ -23,13 +22,10 @@ public class UserEntity {
     private String username;
     private String firstName;
     private String lastName;
-    private String phoneNumber;
     private String photo;
     @Enumerated(value = EnumType.STRING)
     private UserStatus status;
     private Date lastSeen;
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<ChatEntity> chats;
 
     public User toModel() {
         return User.builder()
@@ -37,6 +33,7 @@ public class UserEntity {
                 .username(username)
                 .firstName(firstName)
                 .lastName(lastName)
+                .photo(photo)
                 .status(status)
                 .lastSeen(lastSeen)
                 .build();

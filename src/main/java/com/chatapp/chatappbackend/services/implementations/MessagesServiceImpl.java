@@ -27,7 +27,7 @@ public class MessagesServiceImpl implements MessagesService {
     @Override
     public List<Message> getAll(String userId, String chatId) {
         ChatEntity chatEntity = chatsRepository.findById(chatId).get();
-        return chatEntity.getMessages().stream().map(MessageEntity::toModel).toList();
+        return new ArrayList<>();
     }
 
     @Override
@@ -36,14 +36,12 @@ public class MessagesServiceImpl implements MessagesService {
         MessageEntity messageEntity = MessageEntity.builder()
                 .id(UUID.randomUUID().toString())
                 .content(message.getContent())
-                .sentById(userId)
-                .chatId(chatId)
+                //.sentBy(userId)
+                //.chatId(chatId)
                 .sentAt(new Date())
                 .reactions(new ArrayList<>())
                 .build();
         messageEntity = messagesRepository.save(messageEntity);
-        chatEntity.getMessages().add(messageEntity);
-        chatsRepository.save(chatEntity);
         return messageEntity.toModel();
     }
 

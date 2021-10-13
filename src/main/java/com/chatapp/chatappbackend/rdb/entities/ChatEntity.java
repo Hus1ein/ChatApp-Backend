@@ -23,19 +23,18 @@ public class ChatEntity {
     private String name;
     @Enumerated(value = EnumType.STRING)
     private ChatType type;
-    private String createdBy;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private UserEntity createdBy;
     private Date createdAt;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<UserEntity> participants;
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<MessageEntity> messages;
 
     public Chat toModel() {
         return Chat.builder()
                 .id(id)
                 .name(name)
                 .type(type)
-                .createdBy(createdBy)
+                .createdBy(createdBy.toModel())
                 .participants(participants.stream().map(UserEntity::toModel).toList())
                 .build();
     }
