@@ -6,7 +6,6 @@ import com.chatapp.chatappbackend.services.interfaces.MessagesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MessagesController {
 
-    private final SimpMessagingTemplate simpMessagingTemplate;
     private final MessagesService messagesService;
 
     @GetMapping(path = "/{chatId}")
