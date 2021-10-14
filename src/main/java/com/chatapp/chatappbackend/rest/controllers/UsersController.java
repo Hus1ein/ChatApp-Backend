@@ -1,6 +1,6 @@
 package com.chatapp.chatappbackend.rest.controllers;
 
-import com.chatapp.chatappbackend.rdb.models.User;
+import com.chatapp.chatappbackend.rest.models.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

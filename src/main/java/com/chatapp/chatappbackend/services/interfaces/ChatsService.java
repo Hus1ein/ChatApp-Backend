@@ -1,7 +1,7 @@
 package com.chatapp.chatappbackend.services.interfaces;
 
 import com.chatapp.chatappbackend.rdb.entities.ChatEntity;
-import com.chatapp.chatappbackend.rdb.models.Chat;
+import com.chatapp.chatappbackend.rest.models.Chat;
 
 import java.util.List;
 

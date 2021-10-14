@@ -1,6 +1,6 @@
 package com.chatapp.chatappbackend.rest.controllers;
 
-import com.chatapp.chatappbackend.rdb.models.Message;
+import com.chatapp.chatappbackend.rest.models.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;

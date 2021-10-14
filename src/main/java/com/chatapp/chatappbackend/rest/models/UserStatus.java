@@ -1,4 +1,4 @@
-package com.chatapp.chatappbackend.rdb.models;
+package com.chatapp.chatappbackend.rest.models;
 
 public enum UserStatus {
 

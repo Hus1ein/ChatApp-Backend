@@ -1,7 +1,7 @@
 package com.chatapp.chatappbackend.rdb.entities;
 
-import com.chatapp.chatappbackend.rdb.models.Reaction;
-import com.chatapp.chatappbackend.rdb.models.ReactionType;
+import com.chatapp.chatappbackend.rest.models.Reaction;
+import com.chatapp.chatappbackend.rest.models.ReactionType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

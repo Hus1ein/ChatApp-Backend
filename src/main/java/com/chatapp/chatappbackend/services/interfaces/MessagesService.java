@@ -1,7 +1,7 @@
 package com.chatapp.chatappbackend.services.interfaces;
 
-import com.chatapp.chatappbackend.rdb.models.Message;
-import com.chatapp.chatappbackend.rdb.models.ReactionType;
+import com.chatapp.chatappbackend.rest.models.Message;
+import com.chatapp.chatappbackend.rest.models.ReactionType;
 
 import java.util.List;
 

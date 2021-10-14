@@ -1,6 +1,6 @@
 package com.chatapp.chatappbackend.rdb.entities;
 
-import com.chatapp.chatappbackend.rdb.models.Message;
+import com.chatapp.chatappbackend.rest.models.Message;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.chatapp.chatappbackend.rdb.models;
+package com.chatapp.chatappbackend.rest.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

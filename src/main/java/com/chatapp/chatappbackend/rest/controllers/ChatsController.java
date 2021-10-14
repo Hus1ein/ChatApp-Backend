@@ -1,6 +1,6 @@
 package com.chatapp.chatappbackend.rest.controllers;
 
-import com.chatapp.chatappbackend.rdb.models.Chat;
+import com.chatapp.chatappbackend.rest.models.Chat;
 import com.chatapp.chatappbackend.services.interfaces.ChatsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

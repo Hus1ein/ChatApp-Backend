@@ -2,7 +2,7 @@ package com.chatapp.chatappbackend.services.implementations;
 
 import com.chatapp.chatappbackend.rdb.entities.ChatEntity;
 import com.chatapp.chatappbackend.rdb.entities.UserEntity;
-import com.chatapp.chatappbackend.rdb.models.Chat;
+import com.chatapp.chatappbackend.rest.models.Chat;
 import com.chatapp.chatappbackend.rdb.repositories.ChatsRepository;
 import com.chatapp.chatappbackend.rest.exceptions.ItemNotFoundException;
 import com.chatapp.chatappbackend.services.interfaces.ChatsService;
