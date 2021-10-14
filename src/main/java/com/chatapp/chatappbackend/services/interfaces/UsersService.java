@@ -1,9 +1,11 @@
 package com.chatapp.chatappbackend.services.interfaces;
 
-import com.chatapp.chatappbackend.rdb.models.User;
+import com.chatapp.chatappbackend.rdb.entities.UserEntity;
 
 public interface UsersService {
 
-    User findByUsername(String username);
+    UserEntity findById(String id);
+
+    UserEntity findByUsername(String username);
 
 }

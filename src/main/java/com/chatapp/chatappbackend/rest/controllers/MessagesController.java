@@ -20,8 +20,9 @@ public class MessagesController {
 
     @GetMapping(path = "/{chatId}")
     public ResponseEntity<List<Message>> getAll(@AuthenticationPrincipal String principalName,
-                                                @PathVariable(name = "chatId") String chatId) {
-        return new ResponseEntity<>(messagesService.getAll(principalName, chatId), HttpStatus.OK);
+                                                @PathVariable(name = "chatId") String chatId,
+                                                @RequestParam(name = "pageNum") int pageNum) {
+        return new ResponseEntity<>(messagesService.getAll(principalName, chatId, pageNum), HttpStatus.OK);
     }
 
     @PostMapping(path = "/{chatId}")

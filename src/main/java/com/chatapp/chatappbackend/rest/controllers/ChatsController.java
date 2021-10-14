@@ -18,8 +18,9 @@ public class ChatsController {
     private final ChatsService chatsService;
 
     @GetMapping(path = "")
-    public ResponseEntity<List<Chat>> getAll(@AuthenticationPrincipal String principalName) {
-        return new ResponseEntity<>(chatsService.getAll(principalName), HttpStatus.OK);
+    public ResponseEntity<List<Chat>> getAll(@AuthenticationPrincipal String principalName,
+                                             @RequestParam(name = "pageNum") int pageNum) {
+        return new ResponseEntity<>(chatsService.getAll(principalName, pageNum), HttpStatus.OK);
     }
 
     @PostMapping(path = "")

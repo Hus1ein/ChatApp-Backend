@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @NoArgsConstructor
@@ -17,8 +18,8 @@ public class Message {
 
     private String id;
     private String content;
-    private User sentBy;
-    private Chat chat;
+    private String sentBy;
+    private String chat;
     private Date sentAt;
     private List<Reaction> reactions;
     private List<String> seenBy;
@@ -30,7 +31,8 @@ public class Message {
     public static List<String> stringToList(String string) {
         string = string.replace("[", "");
         string = string.replace("]", "");
-        return Arrays.asList(string.split(","));
+        String[] array = string.split(",");
+        return Arrays.asList(array.length > 0 && Objects.equals(array[0], "") ? new String[0] : array);
     }
 
 }

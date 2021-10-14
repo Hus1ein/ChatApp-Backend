@@ -1,8 +1,8 @@
 package com.chatapp.chatappbackend.services.implementations;
 
 import com.chatapp.chatappbackend.rdb.entities.UserEntity;
-import com.chatapp.chatappbackend.rdb.models.User;
 import com.chatapp.chatappbackend.rdb.repositories.UsersRepository;
+import com.chatapp.chatappbackend.rest.exceptions.ItemNotFoundException;
 import com.chatapp.chatappbackend.services.interfaces.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,9 +14,15 @@ public class UsersServiceImpl implements UsersService {
     private final UsersRepository usersRepository;
 
     @Override
-    public User findByUsername(String username) {
-        UserEntity user = usersRepository.findByUsername(username).orElseThrow(() -> {throw new RuntimeException("Error");});
-        return user.toModel();
+    public UserEntity findById(String id) {
+        return usersRepository.findById(id)
+                .orElseThrow(() -> new ItemNotFoundException("The User: " + id + " doesn't exist"));
+    }
+
+    @Override
+    public UserEntity findByUsername(String username) {
+        return usersRepository.findByUsername(username)
+                .orElseThrow(() -> new ItemNotFoundException("The User: " + username + " doesn't exist"));
     }
 
 }

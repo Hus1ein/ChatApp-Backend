@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface MessagesService {
 
-    List<Message> getAll(String userId, String chatId);
+    List<Message> getAll(String username, String chatId, int pageNum);
 
-    Message create(String userId, String chatId, Message message);
+    Message create(String username, String chatId, Message message);
 
-    void react(String userId, String chatId, String messageId, ReactionType reactionType);
+    void react(String username, String chatId, String messageId, ReactionType reactionType);
 
 }
