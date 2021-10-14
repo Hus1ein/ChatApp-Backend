@@ -23,6 +23,7 @@ public class UserEntity {
     private String firstName;
     private String lastName;
     private String photo;
+    private String registrationToken;
     @Enumerated(value = EnumType.STRING)
     private UserStatus status;
     private Date lastSeen;
