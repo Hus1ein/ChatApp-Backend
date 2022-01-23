@@ -1,7 +1,5 @@
 package com.chatapp.chatappbackend.services.implementations;
 
-import com.chatapp.chatappbackend.rabbitmq.payloads.NewMessagePayload;
-import com.chatapp.chatappbackend.rabbitmq.services.SenderService;
 import com.chatapp.chatappbackend.rdb.entities.ChatEntity;
 import com.chatapp.chatappbackend.rdb.entities.MessageEntity;
 import com.chatapp.chatappbackend.rdb.entities.UserEntity;
@@ -31,7 +29,6 @@ public class MessagesServiceImpl implements MessagesService {
     private final MessagesRepository messagesRepository;
     private final UsersService usersService;
     private final ChatsService chatsService;
-    private final SenderService senderService;
 
     @Override
     public List<Message> getAll(String username, String chatId, int pageNum) {
@@ -73,22 +70,6 @@ public class MessagesServiceImpl implements MessagesService {
                 .seenBy("")
                 .build();
         messageEntity = messagesRepository.save(messageEntity);
-
-        NewMessagePayload payload = NewMessagePayload.builder()
-                .message(messageEntity.toModel())
-                .usernameList(chatEntity.getParticipants()
-                        .stream()
-                        .map(UserEntity::getUsername)
-                        .filter(participantUsername -> !participantUsername.equals(username))
-                        .collect(Collectors.toList()))
-                .registrationTokenList(chatEntity.getParticipants()
-                        .stream()
-                        .filter(participant -> !participant.getUsername().equals(username))
-                        .map(UserEntity::getRegistrationToken)
-                        .collect(Collectors.toList()))
-                .build();
-
-        senderService.sendNewMessagePayload(payload);
 
         return messageEntity.toModel();
     }
