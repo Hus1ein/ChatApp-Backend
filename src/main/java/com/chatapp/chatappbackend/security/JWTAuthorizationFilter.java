@@ -53,11 +53,11 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
             try {
 
                 if (apiKey != null && apiKey.startsWith(SecurityParams.API_KEY_HEADER_PREFIX) &&
-                        apiKey.substring(SecurityParams.API_KEY_HEADER_PREFIX.length() + 1).equals(socketServerApiKey)) {
+                        apiKey.substring(SecurityParams.API_KEY_HEADER_PREFIX.length()).equals(socketServerApiKey)) {
 
                     log.info("Socket-server request was detected.");
                     if (jwt != null && jwt.startsWith(SecurityParams.AUTHORIZATION_HEADER_PREFIX)) {
-                        username = firebaseAuthService.authenticateUser(jwt.substring(SecurityParams.AUTHORIZATION_HEADER_PREFIX.length()));
+                        username = jwt.substring(SecurityParams.AUTHORIZATION_HEADER_PREFIX.length());
                     } else {
                         username = socketServerName;
                     }

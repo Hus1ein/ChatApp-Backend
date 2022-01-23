@@ -1,5 +1,6 @@
 package com.chatapp.chatappbackend.rest.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class Message {
     private String content;
     private String sentBy;
     private String chat;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Date sentAt;
     private List<Reaction> reactions;
     private List<String> seenBy;

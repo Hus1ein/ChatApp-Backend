@@ -29,7 +29,7 @@ public class MessagesController {
     public ResponseEntity<Message> create(@AuthenticationPrincipal String principalName,
                                           @PathVariable(name = "chatId") String chatId,
                                           @RequestBody Message message) {
-        return new ResponseEntity<>(messagesService.create(principalName, chatId, message), HttpStatus.CREATED);
+        return new ResponseEntity<>(messagesService.create("+38762961404", chatId, message), HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/{messageId}/reactions")
