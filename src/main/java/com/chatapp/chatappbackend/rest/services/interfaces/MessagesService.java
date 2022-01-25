@@ -1,7 +1,6 @@
-package com.chatapp.chatappbackend.services.interfaces;
+package com.chatapp.chatappbackend.rest.services.interfaces;
 
 import com.chatapp.chatappbackend.rest.models.Message;
-import com.chatapp.chatappbackend.rest.models.ReactionType;
 
 import java.util.List;
 
@@ -11,6 +10,6 @@ public interface MessagesService {
 
     Message create(String username, String chatId, Message message);
 
-    void react(String username, String chatId, String messageId, ReactionType reactionType);
+    void react(String username, String chatId, String messageId);
 
 }

@@ -8,17 +8,15 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class User {
+public class Project {
 
     private String id;
-    private String username;
-    private String firstName;
-    private String lastName;
-    private String photo;
-    private UserStatus status;
-    private Date lastSeen;
+    private String name;
+    private Date createdAt;
+    private String apiKey;
+    private String authenticationUrl;
 
 }

@@ -1,4 +1,4 @@
-package com.chatapp.chatappbackend.firebase;
+package com.chatapp.chatappbackend.firebase.authentication;
 
 import com.chatapp.chatappbackend.firebase.exceptions.FirebaseAuthenticationException;
 

@@ -1,10 +1,10 @@
 package com.chatapp.chatappbackend.security;
 
-import com.chatapp.chatappbackend.firebase.FirebaseAuthService;
-import com.chatapp.chatappbackend.firebase.exceptions.FirebaseAuthenticationException;
+import com.chatapp.chatappbackend.firebase.authentication.FirebaseAuthService;
+import com.chatapp.chatappbackend.rdb.entities.CompanyEntity;
+import com.chatapp.chatappbackend.rest.services.interfaces.CompaniesService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -21,18 +21,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-@Component
-@RequiredArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
+@Component
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
-    @Value("${socketServer.apiKey}")
-    private String socketServerApiKey;
-
-    @Value("${socketServer.name}")
-    private String socketServerName;
-
     private final FirebaseAuthService firebaseAuthService;
+    private final CompaniesService companiesService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -40,36 +35,29 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Headers", "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, authorization");;
-        response.addHeader("Access-Control-Expose-Headers", "Access-Control-Allow-Origin, Access-Control-Allow-Credentials, authorization");
         response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");
 
         if(request.getMethod().equals("OPTIONS")) {
             response.setStatus(HttpStatus.OK.value());
         } else {
-            String apiKey = request.getHeader(SecurityParams.API_KEY_HEADER);
+            String userAgent = request.getHeader(SecurityParams.USER_AGENT_HEADER);
             String jwt = request.getHeader(SecurityParams.AUTHORIZATION_HEADER);
             String username;
 
             try {
 
-                if (apiKey != null && apiKey.startsWith(SecurityParams.API_KEY_HEADER_PREFIX) &&
-                        apiKey.substring(SecurityParams.API_KEY_HEADER_PREFIX.length()).equals(socketServerApiKey)) {
-
-                    log.info("Socket-server request was detected.");
-                    if (jwt != null && jwt.startsWith(SecurityParams.AUTHORIZATION_HEADER_PREFIX)) {
-                        username = jwt.substring(SecurityParams.AUTHORIZATION_HEADER_PREFIX.length());
-                    } else {
-                        username = socketServerName;
-                    }
-
+                if (userAgent.equals(SecurityParams.WEB_USER_AGENT)) {
+                    String token = jwt.substring(SecurityParams.AUTHORIZATION_HEADER_PREFIX.length());
+                    username = SecurityParams.COMPANY_PREFIX + firebaseAuthService.authenticateUser(token);
+                } else if (userAgent.equals(SecurityParams.MOBILE_USER_AGENT)){
+                    String apiKey = request.getHeader(SecurityParams.API_KEY_HEADER);
+                    CompanyEntity company = companiesService.getByApiKey(apiKey);
+                    username = "";
+                    //TODO find userId by asking client url.
+                    //TODO username = SecurityParams.COMPANY_PREFIX + companyId + "," + SecurityParams.USER_PREFIX + userId;
                 } else {
-                    if (jwt == null || !jwt.startsWith(SecurityParams.AUTHORIZATION_HEADER_PREFIX)) {
-                        log.error("The request was received without a token!");
-                        filterChain.doFilter(request, response);
-                        return;
-                    } else {
-                        username = firebaseAuthService.authenticateUser(jwt.substring(SecurityParams.AUTHORIZATION_HEADER_PREFIX.length()));
-                    }
+                    filterChain.doFilter(request, response);
+                    return;
                 }
 
                 Collection<GrantedAuthority> authorities = new ArrayList<>();
@@ -77,7 +65,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username,null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(token);
                 filterChain.doFilter(request, response);
-            } catch (FirebaseAuthenticationException e) {
+            } catch (Exception e) {
                 filterChain.doFilter(request, response);
             }
         }

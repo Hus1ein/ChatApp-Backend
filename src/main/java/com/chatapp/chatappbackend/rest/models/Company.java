@@ -6,16 +6,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Message {
+public class Company {
 
     private String id;
-    private String content;
-    private String sentBy;
-    private Date sentAt;
+    private String username;
+    private String name;
+    private List<Project> projects;
+    private Package packageModel;
+    private Date lastSubscribe;
+    private Date subscribedUntil;
 
 }

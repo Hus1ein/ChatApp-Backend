@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Reaction {
+public class Package {
 
     private String id;
-    private String reactedBy;
-    private ReactionType type;
+    private String name;
+    private int price;
 
 }

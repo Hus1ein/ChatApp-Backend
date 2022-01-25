@@ -1,7 +1,7 @@
 package com.chatapp.chatappbackend.rest.controllers;
 
 import com.chatapp.chatappbackend.rest.models.Chat;
-import com.chatapp.chatappbackend.services.interfaces.ChatsService;
+import com.chatapp.chatappbackend.rest.services.interfaces.ChatsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ public class ChatsController {
     @PostMapping(path = "")
     public ResponseEntity<Chat> create(@AuthenticationPrincipal String principalName,
                                        @RequestBody Chat chat) {
-        return new ResponseEntity<>(chatsService.create(principalName, chat), HttpStatus.CREATED);
+        return new ResponseEntity<>(chatsService.create(principalName, "", chat), HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/{chatId}")

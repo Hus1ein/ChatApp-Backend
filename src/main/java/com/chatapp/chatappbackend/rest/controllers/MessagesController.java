@@ -1,8 +1,7 @@
 package com.chatapp.chatappbackend.rest.controllers;
 
 import com.chatapp.chatappbackend.rest.models.Message;
-import com.chatapp.chatappbackend.rest.models.ReactionType;
-import com.chatapp.chatappbackend.services.interfaces.MessagesService;
+import com.chatapp.chatappbackend.rest.services.interfaces.MessagesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,13 +29,6 @@ public class MessagesController {
                                           @PathVariable(name = "chatId") String chatId,
                                           @RequestBody Message message) {
         return new ResponseEntity<>(messagesService.create("+38762961404", chatId, message), HttpStatus.CREATED);
-    }
-
-    @PutMapping(path = "/{messageId}/reactions")
-    public ResponseEntity react(@AuthenticationPrincipal String principalName,
-                                @PathVariable(name = "messageId") String messageId,
-                                @RequestParam(name = "reactionType") ReactionType reactionType) {
-        return ResponseEntity.noContent().build();
     }
 
 }
